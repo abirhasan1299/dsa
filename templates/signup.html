@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% block body %}
+
+<h1 style="color:whitesmoke;text-align: center;"> SignUp Page</h1>
+<div class="row">
+<div class="d-flex justify-content-around">
+    <form method="post" style="width:50%;">
+    
+        {% csrf_token %}
+    
+        <input class="form-control" type="text" placeholder="Name" name="name" required>
+        <br>
+        <input class="form-control" type="email" placeholder="Email" name="email" required>
+        <br>
+        <input class="form-control" type="number" placeholder="Phone or Mobile" name="mobile" required>
+        <br>
+        <label for="password" id="p"></label>
+        <input class="form-control" id="password" type="password" placeholder="Set Password" name="password" required>
+        <br>
+        <select name="sex" class="form-control">
+            <option value="Male" selected>Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+        </select>
+        <br>
+        <label style="color:greenyellow">Date of Birth</label>
+        <input class="form-control" type="date" placeholder="Date of Birth" name="dob" required>
+        <br>
+        <input type="submit" class="form-control btn btn-warning" value="Done" id="submit">
+    
+    </form>
+</div>
+</div>
+{% endblock body %}
+{% block js %}
+<script type="text/javascript">
+    pass = document.getElementById("password");
+    pass.onkeyup = function(){
+        if(pass.value.length <= 5){
+            document.getElementById("p").style.color = 'red';
+            document.getElementById("p").innerHTML = 'Contain more than five character';
+            document.querySelector("#submit").style.visibility = 'hidden';
+        }else{
+            document.getElementById("p").style.color = 'green';
+            document.getElementById("p").innerHTML = 'Strong Password';
+            document.querySelector("#submit").style.visibility = 'visible';
+        }
+    }
+</script>
+{% endblock js %}

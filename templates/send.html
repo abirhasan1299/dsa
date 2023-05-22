@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% load humanize %}
+{% block title %}Send Us{% endblock title %}
+{% block style %}
+<style>
+#text{
+    color:white;
+    text-align:center;
+    padding:2px;
+}
+.form-box{
+    border:1px solid white;
+    border-radius:10px;
+    width:40%;
+    height:auto;
+    margin-top:5%;
+    box-shadow:5px 10px 18px #fff1f2;
+}
+.form input[type='email'],input[type='password']{
+    border-radius:50px;
+}
+.form{
+    padding:20px;
+}
+.form a{
+   
+    color:#f87171;
+}
+#email,#password{
+    margin-left:5%;
+    padding:5px;
+}
+</style>
+{% endblock style %}
+{% block body %}
+<div class="row">
+    <div class="d-flex justify-content-around">
+        <div class="form-box">
+        <h1 id="text">Login</h1>
+        <div class="form">
+            <form method="post">
+                {% csrf_token %}
+                <input type='email' name="email" id="mail" class='form-control' placeholder="Email" required>
+                <span id="email"></span><br>
+                <input type='password' id="psw" name="password" class='form-control' placeholder="Password" required>
+                <span id="password"></span><br>
+                <input type='submit' class='form-control btn btn-primary' value="Login"><br><br>
+            </form>
+            <center><a href="#">Forgotten Password?</a></center>
+        </div>
+    </div>
+    
+    </div>
+   
+</div>
+<h1></h1>
+{% endblock body %}
+{% block js %}
+<script type="text/javascript">
+var psw = document.getElementById('psw');
+psw.onblur = function(){
+    document.getElementById('password').style.display = 'none';
+}
+psw.onfocus = function(){
+    document.getElementById('password').style.display = 'block';
+}
+psw.onkeyup = function(){
+    if(psw.value.length <= 5){
+        document.getElementById('password').style.color = 'red';
+        document.getElementById('password').innerHTML = "<i class='bi bi-x-circle-fill'></i> Must Contains five letters or more .";
+    }else{
+        document.getElementById('password').style.color = 'green';
+        document.getElementById('password').innerHTML = "<i class='bi bi-check-circle-fill'></i> Valid Password .";
+    }
+}
+</script>
+{% endblock js %}
